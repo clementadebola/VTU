@@ -19,12 +19,43 @@ const Container = styled.div`
   align-items: center;
   height: 100vh;
   background-color: #f4f4f9;
+  padding: 20px;
 `;
 
 const FormCard = styled(Card)`
-  width: 400px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
+  width: 100%;
+  max-width: 420px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  background-color: #ffffff;
+
+  @media (max-width: 768px) {
+    padding: 16px;
+  }
+`;
+
+const StyledButton = styled(Button)`
+  && {
+    margin-top: 20px;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 0;
+    font-weight: bold;
+    border-radius: 12px;
+    text-transform: none;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+`;
+
+const Title = styled(Typography)`
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20px;
 `;
 
 const AirtimePurchase: React.FC = () => {
@@ -57,12 +88,12 @@ const AirtimePurchase: React.FC = () => {
     <Container>
       <FormCard>
         <CardContent>
-          <Typography variant="h5" gutterBottom>
+          <Title variant="h5" gutterBottom>
             Buy Airtime
-          </Typography>
+          </Title>
           <TextField
             select
-            label="Network"
+            label="Select Network"
             fullWidth
             margin="normal"
             value={network}
@@ -76,11 +107,12 @@ const AirtimePurchase: React.FC = () => {
 
           <TextField
             label="Phone Number"
-            type="text"
+            type="tel"
             fullWidth
             margin="normal"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
+            placeholder="e.g., 08123456789"
           />
 
           <TextField
@@ -90,17 +122,16 @@ const AirtimePurchase: React.FC = () => {
             margin="normal"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
+            placeholder="Enter amount"
           />
 
-          <Button
+          <StyledButton
             variant="contained"
-            color="primary"
             fullWidth
             onClick={handlePurchase}
-            style={{ marginTop: '20px' }}
           >
             Purchase Airtime
-          </Button>
+          </StyledButton>
 
           <Snackbar
             open={openSnackbar}
